@@ -1,0 +1,41 @@
+{% set theme = app.session.get('theme') %}
+{% extends theme ~ '/base_main.html.twig' %}
+
+{% block stylesheets %}
+
+	{{ parent() }}
+	
+	<!-- Custom styles for this template -->
+	<link href="{{ asset('css/'~ theme ~'/contenido.css') }}" rel="stylesheet">
+	
+{% endblock %}
+
+
+{% block principal %}
+
+      <div class="blog-header"> 
+		<h1 class="blog-title">{{ page.getTitulo() }}</h1> 
+		<p class="lead blog-description">{{ page.getDescripcion()|raw }}</p> 
+	  </div> 
+
+	  <div class="row">
+
+        <div class="col-sm-8 blog-main">
+
+          <div class="blog-post">
+		  
+		    <p>{{ page.getContenido()|raw }}</p>
+			
+          </div>
+          
+          {% if page.getLink() != "" %}
+              <div>
+                <p><a href="{{ page.getLink() }}"> M&aacute;s Informaci&oacute;n &gt;&gt; </a></p>
+              </div>
+          {% endif %}
+
+        </div>
+
+      </div>
+
+{% endblock %}

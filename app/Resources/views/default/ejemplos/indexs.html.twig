@@ -1,0 +1,93 @@
+{% set theme = app.session.get('theme') %}
+{% set marcas = app.session.get('marcas') %}
+{% set config = app.session.get('config') %}
+
+{% extends theme~'/base_left.html.twig' %}
+
+{% block stylesheets %}
+
+	{{ parent() }}
+	
+	<!-- Custom styles for this template -->
+	<link href="{{ asset('css/'~theme~'/shop-homepage.css') }}" rel="stylesheet">    
+	
+{% endblock %}
+
+
+
+{% block left %}
+
+    {% if config.get_blq_categ_activo() %} 
+        {{ include (theme ~ '/block_arbol.html.twig', {'titulo': config.get_blq_categ_titulo() } ) }} 
+    {% endif %}
+	
+    {% if config.get_blq_marcas_activo() %} 
+        {{ include (theme ~ '/block_dropdown.html.twig', {'titulo':config.get_blq_marcas_titulo(), 'prioritarias': marcas[0], 'todas':marcas[1]  } ) }}   
+    {% endif %}
+    
+    {% if config.get_blq_tiendas_activo() %}
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">{{ config.get_blq_tiendas_titulo() }}</h3>
+          </div>
+          <a href="{{ url('tiendas') }}">
+          <div class="panel-body">
+             <img src="{{ asset('img/tiendas.png') }}" class="img-rounded" alt="" width="230px">
+          </div>
+          </a>
+        </div>
+    {% endif %}   
+
+    {% if config.get_otros_bloques_activo() %}
+		{% for bloque in config.get_otros_bloques() %} 
+            {{ include (theme ~ '/block_otros_bloques.html.twig',{'bloque': bloque})}} 
+		{% endfor %}
+    {% endif %}     
+	
+{% endblock %}
+
+
+
+{% block principal %}
+
+	<div class="row carousel-holder">
+		<div class="col-md-12">
+		{% if ls_carrousel|length > 0 %}  
+			{{ include (theme ~ '/block_carousel.basic.html.twig',{'banners': ls_carrousel})}}
+		{% endif %}
+		</div>
+	</div>
+
+	<div class="row">
+		{% for articulo in articulos %} 
+			<div class="col-lg-4 col-sm-4 hero-feature text-center">
+				{{ include (theme ~ '/block_articulo.thumb.html.twig',{'articulo': articulo})}} 
+			</div>
+		{% endfor %}  
+	</div>
+	
+{% endblock %} 
+
+
+{% block javascript %}
+	{{ parent() }}
+	
+    {% if config.get_blq_categ_activo() %}
+        <!-- Gestión del arbol de categorias --- -->  
+        <script src="{{ asset('js/bootstrap-treeview.min.js') }}"></script>
+        <script type="text/javascript">
+
+            $(function() {
+
+            var json = {{ categorias | json_encode() | raw }};  
+
+            var $tree = $('#treeview_categ').treeview({
+              data: json, 
+              enableLinks: true,
+              levels:1
+                });
+            });
+        </script>
+    {% endif %}
+	
+{% endblock %}

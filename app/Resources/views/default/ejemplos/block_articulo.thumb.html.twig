@@ -1,0 +1,50 @@
+{% set config = app.session.get('config') %}
+
+{#
+<div class="thumbnail">
+    <a class="link-p" href="{{ url('articulo',{'id': articulo.getUrlAmigable()}) }}" style="overflow: hidden; position: relative;">
+        <img alt="" src="{{ articulo.getImagenPpal() }}" style="position: absolute; width: 243px; height: 258px; max-width: none; max-height: none; left: 0px; top: 0px;" class="">
+    </a>
+    <div class="caption prod-caption">
+        <h4><a href="{{ url('articulo',{'id': articulo.getUrlAmigable()}) }}">{{ articulo.getNombre() }} </a></h4>
+        <p>{{ articulo.GetDescripcion() }}</p>
+        <p>
+            </p><div class="btn-group">
+                <a class="btn btn-default" href="#">{{ articulo.getPrecio()|number_format(config.get_decimales()) }} &euro;</a>
+                <a class="btn btn-primary" href="#"><i class="fa fa-shopping-cart"></i> Comprar</a>
+            </div>
+        <p></p>
+    </div>
+</div>
+#}
+
+
+
+<div class="thumbnail">
+    <a class="link-p" href="{{ asset(url('articulo',{'id': articulo.getUrlAmigable()})) }}" style="overflow: hidden; position: relative;">
+        <img alt="" src="{{ asset(articulo.getImagenPpal()) }}" style="width: 250px; height: auto; max-width: none; max-height: none; left: -3px; top: 0px;">
+    </a>
+    <div class="caption prod-caption">
+        <h4><a href="{{ url('articulo',{'id': articulo.getUrlAmigable()}) }}">{{ articulo.getNombre() }}</a></h4>
+        <p class="descrip">{{ articulo.getDescripcion()|length > 100 ? articulo.getDescripcion()[:100] ~ '...' : articulo.getDescripcion() }}</p>
+        <div class="ratings">
+            <p class="pull-right">{{ articulo.getNum_Opiniones() }} comentarios</p>
+            <p>
+				{% for i in range(1,5) %}
+					{% if articulo.getValoracion_Media() >= i %}
+						<span class="glyphicon glyphicon-star"></span>
+					{% else %}	
+						<span class="glyphicon glyphicon-star-empty"></span>
+					{% endif %}							
+				{% endfor %}
+            </p>
+        </div>                            
+        <p>
+            </p><div class="btn-group">
+                <a class="btn btn-default" href="#">{{ articulo.getPrecio()|number_format(config.get_decimales()) }} &euro;</a>
+                <a class="btn btn-primary" href="#"><i class="fa fa-shopping-cart"></i> A&ntilde;adir</a>
+            </div>
+        <p></p>
+    </div>
+</div>
+

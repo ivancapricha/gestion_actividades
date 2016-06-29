@@ -1,0 +1,62 @@
+{% set theme = app.session.get('theme') %}
+
+{% extends theme~'/base.html.twig' %} 
+
+{% block content %} 
+
+	<div class="container">
+		<div class="row">
+			<h3>{{alumno.nombre ~ ' ' ~ alumno.apellido1 ~ ' ' ~ alumno.apellido2}}</h3>
+			<div class="the-list">
+				<div class="col-xs-12">Fecha de Nascimiento: {{alumno.fechanasc|date("d/m/Y") }}</div>
+				<div class="col-xs-12">Curso: {{alumno.curso }}</div>
+				<div class="col-xs-12">Colegio: {{alumno.colegio }}</div>
+				<div class="col-xs-12">Nivel: {{alumno.nivel }}</div>
+			</div>		
+					
+			<hr>
+			
+			<h3>Lista de Actividades</h3>
+			
+            <div class="table-responsive">
+                <table class="table table-bordered tbl-cart">
+                    <thead>
+                        <tr>
+							<td class="text-center">Id</td>
+							<td>Nombre</td>
+							<td>Curso</td>
+							<td>Fecha Inicio</td>
+							<td>Fecha Fin</td>
+							<td>Lugar</td>
+							<td>Estado</td>
+							<td></td>
+							<td></td>
+                            </tr>
+                        </thead>
+                    </thead>
+                    <tbody>
+						{% for ln in actividades %}
+							<tr>
+								<td>{{ ln.id }}</td>
+								<td>{{ ln.nombre }}</td>
+								<td>{{ ln.curso }}</td>
+								<td>{{ ln.fechaini|date("d/m/Y") }}</td>
+								<td>{{ ln.fechafin|date("d/m/Y") }}</td>
+								<td>{{ ln.lugar }}</td>
+								<td>{% if alumno.id in ln.alumnos %} 
+										PARTICIPA
+									{% endif %}
+								</td>
+								<td class="text-center"> <a rel="2" class="" href="{{ url('asignar_actividad',{'id_alumno': alumno.id(),'id_actividad': ln.id()}) }}"> <i class="glyphicon glyphicon-ok"></i> </a></td>
+								<td class="text-center"> <a rel="2" class="" href="{{ url('quitar_actividad',{'id_alumno': alumno.id(),'id_actividad': ln.id()}) }}"> <i class="glyphicon glyphicon-remove"></i> </a></td>
+							</tr>
+						{% endfor %}					   
+                    </tbody>    
+                </table>    
+		</div>			
+		</div>	
+	</div>
+
+	
+{% endblock %} 
+

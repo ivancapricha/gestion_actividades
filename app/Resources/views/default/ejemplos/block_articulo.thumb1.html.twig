@@ -1,0 +1,19 @@
+<div class="thumbnail">
+    <img src="http://placehold.it/320x150" alt="">
+    <div class="caption">
+        <h4 class="pull-right">{{articulo.getPrice()|number_format(2, '.', ',')}} &euro;</h4>
+        <h4><a href="#">{{articulo.getName()}}</a>
+        </h4>
+        <p>{{articulo.getDescription()|raw}}</p>
+    </div>
+    <div class="ratings">
+        <p class="pull-right">12 reviews</p>
+        <p>
+            <span class="glyphicon glyphicon-star"></span>
+            <span class="glyphicon glyphicon-star"></span>
+            <span class="glyphicon glyphicon-star"></span>
+            <span class="glyphicon glyphicon-star"></span>
+            <span class="glyphicon glyphicon-star-empty"></span>
+        </p>
+    </div>
+</div>

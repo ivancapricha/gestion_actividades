@@ -1,0 +1,38 @@
+<!-- Carousel  ================================================== -->
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Carousel indicators -->
+    <ol class="carousel-indicators">
+    {% for i in 0..banners|length-1 %}
+        {% if i==0 %}
+            <li data-target="#myCarousel" data-slide-to="{{ i }}" class="active"></li>
+        {% else %}
+            <li data-target="#myCarousel" data-slide-to="{{ i }}"></li>
+        {% endif %}
+    {% endfor %}
+    </ol>   
+
+    <!-- Wrapper for carousel items -->
+    <div class="carousel-inner">
+
+        {% for i in 0..banners|length-1 %}
+            {% if i==0 %}
+                <div class="item active">
+            {% else %}
+                <div class="item">
+            {% endif %}
+
+                <img class="slide-image" src="{{ asset(banners[i].getUrl_Imagen()) }}" alt="{{ banners[i].getTitulo() }}">
+            </div>
+        {% endfor %}
+
+    </div>
+
+    <!-- Carousel controls -->
+    <a class="carousel-control left" href="#myCarousel" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+    </a>
+    <a class="carousel-control right" href="#myCarousel" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+    </a>
+</div>
+<!-- /.carousel -->

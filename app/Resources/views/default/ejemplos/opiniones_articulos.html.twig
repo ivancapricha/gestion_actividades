@@ -1,0 +1,64 @@
+<div class="well">	
+	{% for opiniones in articulo.getOpiniones() %}	
+		<div class="media">
+			<div class="media-body">
+				<h5 class="media-heading"><strong>{{ opiniones.getNombre() }}</strong></h5>
+				
+				<div class="product-rating">
+					{% for i in range(1,5) %}
+						{% if opiniones.getValoracion() >= i %}
+							<i class="fa fa-star"></i>
+						{% else %}	
+							<i class="fa fa-star-o"></i>
+						{% endif %}							
+					{% endfor %}				
+
+					<!--
+					<i class="fa fa-star"></i>
+					<i class="fa fa-star-half-o"></i>
+					<i class="fa fa-star-o"></i>
+					-->
+				</div>			
+				
+				{{ opiniones.getDescripcion() }}
+			</div>
+		</div>		
+	{% endfor %}	
+	
+
+	<hr>
+	<h4>Denos su opinión</h4>
+	<p></p>
+	
+	<form id="form_opinion" action="{{path('form_opinion')}}" class="ajaxForm" role="form" method="post" >
+		<input id="id_ar" type="hidden" value="{{ articulo.getId() }}">
+		<div class="form-group">
+			<input id="nombre" type="text" required="" placeholder="Nombre" class="form-control">
+		</div>
+		<div class="form-group" style>
+			<input id="email" type="email" required="" placeholder="Email" class="form-control">
+		</div>
+		<div class="form-group">
+			<select id="valoracion" class="form-control">
+				<option>1 estrella</option>
+				<option>2 estrellas</option>
+				<option>3 estrellas</option>
+				<option>4 estrellas</option>
+				<option>5 estrellas</option>
+			</select>
+		</div>
+		<div class="form-group">
+			<textarea id="opinion" required="" placeholder="Su opinión" rows="5" class="form-control"></textarea>
+		</div>
+		<button class="btn btn-default" type="submit">Enviar</button>
+		<hr>
+		<div class="form_success at_success"></div>
+		<div class="form_error at_error"></div>
+	</form>		
+	 
+	<script>
+		AjaxForm();
+	</script>
+
+	
+</div>

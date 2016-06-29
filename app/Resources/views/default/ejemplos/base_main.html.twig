@@ -1,0 +1,17 @@
+{% set theme = app.session.get('theme') %}
+{% extends theme~'/base.html.twig' %}
+
+{% block content %}
+
+	{% block cabecera %}
+		
+	{% endblock %}
+
+	
+	<div class="container">
+		{% block principal %}
+			Contenido Principal
+		{% endblock %}
+	</div>
+
+{% endblock %}

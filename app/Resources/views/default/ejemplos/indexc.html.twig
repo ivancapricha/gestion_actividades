@@ -1,0 +1,91 @@
+{% set theme = app.session.get('theme') %}
+{% extends theme~'/base_main.html.twig' %}
+
+{% block stylesheets %}
+
+	{{ parent() }}
+	
+	<!-- Custom styles for this template -->
+	<link href="css/{{ theme }}/carousel.css" rel="stylesheet">
+	
+{% endblock %}
+
+
+{% block cabecera %}
+	{% if ls_carrousel|length > 0 %}
+		{{ include (theme~'/block_carousel.texto.html.twig',{'banners': ls_carrousel}) }}
+	{% endif %}
+{% endblock %}
+
+
+{% block principal %}
+
+    <!-- Marketing messaging and featurettes  
+    ================================================== -->    
+    <!-- Wrap the rest of the page in another container to center all the content. -->   
+
+    <div class="container marketing">  
+
+      <!-- Three columns of text below the carousel -->
+      <div class="row">
+
+
+        {% if marketing|length > 0 %}
+            {% for i in 0..marketing|length-1 %} 
+                {% if i%3==0 %}
+                    </div> <div class="row">
+                {% endif %}
+          
+                <div class="col-lg-4">
+                  <img class="img-circle" src="{{ asset(marketing[i].getUrl_Imagen()) }}" alt="Imagen {{ marketing[i].getTitulo() }}" width="140" height="140">
+                  <h2>{{ marketing[i].getTitulo() }}</h2>
+                  <p>{{ marketing[i].getDescripcion()|raw }}</p>
+                  {% if (marketing[i].getTxtButton() != '') %}
+                    <p><a class="btn btn-default" href="{{ marketing[i].getUrl() }}" role="button">{{ marketing[i].getTxtButton() }} &raquo;</a></p>
+                  {% endif %}  
+                </div><!-- /.col-lg-4 -->
+                
+            {% endfor %}
+        {% endif %}
+
+      </div> <!-- /.row -->
+
+
+      <!-- START THE FEATURETTES -->
+
+      {% if features|length > 0 %}
+          {% for i in 0..features|length-1 %}
+
+              <hr class="featurette-divider">
+
+              <div class="row featurette">
+                <div class="col-md-7">
+                  <h2 class="featurette-heading">{{ features[i].getTitulo() }}<span class="text-muted"> </span></h2>
+                  <p class="lead">{{ features[i].getDescripcion()|raw }}</p>
+                </div>
+                <div class="col-md-5">
+                  <img class="featurette-image img-responsive center-block" src="{{ asset(features[i].getUrl_Imagen()) }}" alt="{{ features[i].getTitulo() }}">
+                </div>
+              </div>
+          
+          {% endfor %}
+      {% endif %}
+	  
+
+      <hr class="featurette-divider">
+
+      <!-- /END THE FEATURETTES -->
+
+
+    </div><!-- /.container -->
+
+{% endblock %}
+
+
+{% block javascript %}
+	{{ parent() }}
+	
+    <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+    <script src="js/vendor/holder.min.js"></script>	
+	
+{% endblock %}

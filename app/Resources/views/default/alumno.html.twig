@@ -1,0 +1,71 @@
+{% set theme = app.session.get('theme') %}
+
+{% extends theme~'/base.html.twig' %} 
+
+{% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
+
+{% block content %} 
+
+	<div class="container">
+		<div class="row">
+			<h1>Gestión de Actividades </h1>
+			
+			<hr> 
+			<h3>Alta de nuevos Alumnos</h3>
+			
+			{{ form_start(form) }}
+				{{ form_widget(form) }}
+
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<button type="submit" class="btn btn-default">Grabar</button>
+					</div>
+				</div>
+			{{ form_end(form) }}
+			
+			<hr> 
+			
+			<h3>Sus alumnos</h3>
+			
+            <div class="table-responsive">
+                <table class="table table-bordered tbl-cart">
+                    <thead>
+                        <tr>
+							<td class="text-center">Id</td>
+							<td>Nombre</td>
+							<td>1º Apellido</td>
+							<td>2º Apellido</td>
+							<td>Fecha Nasc.</td>
+							<td>Curso</td>
+							<td>Colegio</td>
+							<td>Nivel</td>	
+							<td class="text-center">Eliminar</td>
+							<td class="text-center">Actividades</td>
+                            </tr>
+                        </thead>
+                    </thead>
+                    <tbody>
+						{% for ln in list %}
+							<tr>
+								<td>{{ ln.id }}</td>
+								<td>{{ ln.nombre }}</td>
+								<td>{{ ln.apellido1 }}</td>
+								<td>{{ ln.apellido2 }}</td>
+								<td>{{ ln.fechanasc|date("d/m/Y") }}</td>
+								<td>{{ ln.curso }}</td>								
+								<td>{{ ln.colegio }}</td>								
+								<td>{{ ln.nivel }}</td>								
+
+								<td class="text-center"> <a rel="2" class="remove_cart" href="{{ url('eliminar_alumno',{'id': ln.id()}) }}"> <i class="fa fa-trash-o"></i> </a></td>
+								<td class="text-center"> <a rel="2" class="" href="{{ url('actividades_alumno',{'id': ln.getUrlAmigable()}) }}"> <i class="glyphicon glyphicon-list-alt"></i> </a></td>
+							</tr>
+						{% endfor %}					   
+                    </tbody>    
+                </table>    
+            </div>					
+		</div>	
+	</div>
+
+	
+{% endblock %} 
+

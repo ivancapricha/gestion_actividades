@@ -1,0 +1,51 @@
+<div class="panel panel-default">
+
+    <div class="panel-heading">
+        <h3 class="panel-title">{{ bloque.getTitulo() }}</h3>
+    </div>
+    
+    <div class="panel-body">
+
+        {% if bloque.getTipo() == constant('AppBundle\\Entity\\Bloque::TIPO_BLOQUE_BANNER') %}
+
+            {% if bloque.getUrl() == '' %}
+                <a href="{{ asset(url('banner',{'id': bloque.getId()})) }}" target="_blank">
+            {% else %}
+                <a href="{{ bloque.getUrl() }}" target="_blank">
+            {% endif %}
+                    <img src="{{ asset('img/banners/'~bloque.getImagen()) }}" class="img" alt="" width="230px">
+                </a>
+            
+        {% elseif bloque.getTipo() == constant('AppBundle\\Entity\\Bloque::TIPO_BLOQUE_ART_IMG') %}
+
+            {% for art in bloque.getArticulos() %}
+                <a href="{{ asset(url('articulo',{'id': art.getUrlAmigable()})) }}" >
+                    <img class="img" style="width: 49%" src="{{ asset(art.getImagenPpal()) }}" alt="{{ art.getNombre() }}">
+                </a>
+            {% endfor %}
+
+        {% elseif bloque.getTipo() == constant('AppBundle\\Entity\\Bloque::TIPO_BLOQUE_ART_DENO') %}
+            <ul class="nav nav-pills">
+                {% for art in bloque.getArticulos() %}
+                    <li> <a href="{{ asset(url('articulo',{'id': art.getUrlAmigable()})) }}" > {{ art.getNombre() }}</a> </li>
+                {% endfor %}
+            </ul>
+
+        {% elseif bloque.getTipo() == constant('AppBundle\\Entity\\Bloque::TIPO_BLOQUE_ART_MIX') %}
+            {% for art in bloque.getArticulos() %}
+                <div class="row">
+                    <a href="{{ asset(url('articulo',{'id': art.getUrlAmigable()})) }}" class="pull-left" >
+                        <div class="col-md-4">                            
+                            <img class="img" style="width: 100%" src="{{ asset(art.getImagenPpal('reducida')) }}" alt="{{ art.getNombre() }}"> 
+                        </div>
+                        <div class="col-md-8"> 
+                            <p>{{ art.getNombre() }}</p>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+ 
+        {% endif %}
+    </div>
+
+</div>

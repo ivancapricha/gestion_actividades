@@ -1,0 +1,61 @@
+{% set theme = app.session.get('theme') %}
+
+{% extends theme~'/base.html.twig' %} 
+
+{% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
+
+{% block content %} 
+
+	<div class="container">
+		<div class="row">
+			<h1>Panel de Administración </h1>
+			
+			<hr> 
+			<h3>Alta de un nuevo nivel</h3>
+			
+			{{ form_start(form) }}
+				{{ form_widget(form) }}
+
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<button type="submit" class="btn btn-default">Grabar</button>
+					</div>
+				</div>
+			{{ form_end(form) }}
+			
+			<hr> 
+			
+			<h3>Niveles actuales</h3>
+			
+            <div class="table-responsive">
+                <table class="table table-bordered tbl-cart">
+                    <thead>
+                        <tr>
+							<td class="text-center">Id</td>
+							<td>Nombre</td>
+							<td>Monitor</td>
+							<td class="text-center">Eliminar</td>
+                            </tr>
+                        </thead>
+                    </thead>
+                    <tbody>
+						{% for ln in list %}
+							<tr>
+								<td>{{ ln.id }}</td>
+								<td>{{ ln.nombre }}</td>
+								<td>{% for monitor in ln.monitores %}
+										<div>{{ monitor }}</div>
+									{% endfor %}
+								</td>
+								<td class="text-center"> <a rel="2" class="remove_cart" href="{{ url('eliminar_nivel',{'id': ln.id()}) }}"> <i class="fa fa-trash-o"></i> </a></td>
+							</tr>
+						{% endfor %}					   
+                    </tbody>    
+                </table>    
+            </div>					
+		</div>	
+	</div>
+
+	
+{% endblock %} 
+

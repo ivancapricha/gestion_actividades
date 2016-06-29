@@ -1,0 +1,262 @@
+/*
+ *	Retoques hechos por galdón al tema original
+
+*/
+
+body {
+    padding-top: 60px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+}
+
+.full_bg {
+    background: url('/img/fondo.png') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
+/*
+*  Categorías
+*/
+span.title {
+    border-bottom: 3px solid #eee;
+    color: #4c7ed3;
+    display: block;
+    font-size: 16px;
+    margin-bottom: 20px;
+    padding-bottom: 8px;
+}
+
+.link-p {       /* Para el thumbnail de la lista de productos */
+    display: block;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100%;
+    min-height: 250px;
+    width: 100%;
+}
+.prod-caption{
+	background: #fbfbfb;
+	border-top: 1px solid #ddd;
+}
+.prod-caption h4{
+	font-size: 16px;
+	height: 32px;
+	overflow: hidden;
+}
+.prod-caption .descrip{
+	height: 50px;
+	/*overflow: hidden;*/
+}
+
+/*
+*   Detalle del Articulo
+*/
+.product-thumb-image{ padding: 2px; }
+.product-main-image, .product-thumb-image .thumbnail{ margin-bottom: 0 }
+.product-main-image{ cursor: zoom-in; cursor: -webkit-zoom-in; cursor: -moz-zoom-in; min-height: 400px; }
+.product-main-image-container{ position: relative }
+.product-loader{
+	position: absolute;
+	top: 4px;
+	right: 4px;
+	z-index: 1;
+	width: 60px;
+	height: 9px
+}
+.product-short-detail label{ font-weight: normal }
+.product-short-detail .col-xs-8:before{
+	margin-right: 3px;
+	content: ':'
+}
+.thumbnail {
+    border-radius: 0;
+}
+.product-detail-tab .nav-tabs a:focus, .product-detail-tab .nav-tabs a:active{ outline: 0 }
+.product-detail-tab .well{
+	border-top: 0;
+	background: #fff
+}
+#detail table tr td:first-child, .comparison tbody tr td:first-child, .compare-product{ background: #f8f8f8 }
+.comparison{ text-align: center }
+.comparison tbody tr td:first-child{ text-align: left }
+.product-rating {
+    margin-top: 5px;
+    color: #FFCC00;
+    font-size: 12px
+}
+
+.the-list{
+	float: left;
+	margin: 10px 0;
+	width: 100%
+}
+.the-list h3{ margin: 0 }
+.the-list select{
+	display: inline;
+	width: auto
+}
+.price-old{
+  color: #7e7e7e;
+  overflow: hidden;
+  padding-bottom: 5px;
+  text-decoration: line-through;
+  font-size: 0.8em;
+}
+
+.green{ color: green }
+.red{ color: red }
+
+.input-qty-detail .bootstrap-touchspin{
+	float: left;
+	margin-right: 5px;
+	margin-bottom: 1px;
+	width: 130px
+}
+.add-to-detail a{
+	color: #333;
+	font-size: 12px
+}
+
+
+#map-outer {
+    background-color: #fff;
+    border: 2px solid #ccc;
+    height: 440px;
+    margin-bottom: 20px;
+    padding: 20px;
+}
+.map-container {
+    height: 400px;
+}
+.gm-style {
+    font-family: Roboto,Arial,sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    text-decoration: none;
+}
+
+/*
+ --------------------------------------------------------------------------------------------------------
+ LOGIN
+ --------------------------------------------------------------------------------------------------------
+*/
+
+#login-dp {
+  background-color: rgba(255, 255, 255, 0.8);
+  min-width: 250px;
+  overflow: hidden;
+  padding: 14px 14px 0;
+}
+#login-dp .social-buttons {
+  margin: 12px 0;
+}
+#login-dp .social-buttons a {
+  width: 49%;
+}
+.btn-fb {
+  background-color: #3b5998;
+  color: #fff;
+}
+.btn-tw {
+  background-color: #55acee;
+  color: #fff;
+}
+
+.panel-login {
+	border-color: #ccc;
+	-webkit-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
+	-moz-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
+	box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
+}
+.panel-login>.panel-heading {
+	color: #00415d;
+	background-color: #fff;
+	border-color: #fff;
+	text-align:center;
+}
+.panel-login>.panel-heading a{
+	text-decoration: none;
+	color: #666;
+	font-weight: bold;
+	font-size: 15px;
+	-webkit-transition: all 0.1s linear;
+	-moz-transition: all 0.1s linear;
+	transition: all 0.1s linear;
+}
+.panel-login>.panel-heading a.active{
+	color: #029f5b;
+	font-size: 18px;
+}
+.panel-login>.panel-heading hr{
+	margin-top: 10px;
+	margin-bottom: 0px;
+	clear: both;
+	border: 0;
+	height: 1px;
+	background-image: -webkit-linear-gradient(left,rgba(0, 0, 0, 0),rgba(0, 0, 0, 0.15),rgba(0, 0, 0, 0));
+	background-image: -moz-linear-gradient(left,rgba(0,0,0,0),rgba(0,0,0,0.15),rgba(0,0,0,0));
+	background-image: -ms-linear-gradient(left,rgba(0,0,0,0),rgba(0,0,0,0.15),rgba(0,0,0,0));
+	background-image: -o-linear-gradient(left,rgba(0,0,0,0),rgba(0,0,0,0.15),rgba(0,0,0,0));
+}
+.panel-login input[type="text"],.panel-login input[type="email"],.panel-login input[type="password"] {
+	height: 45px;
+	border: 1px solid #ddd;
+	font-size: 16px;
+	-webkit-transition: all 0.1s linear;
+	-moz-transition: all 0.1s linear;
+	transition: all 0.1s linear;
+}
+.panel-login input:hover,
+.panel-login input:focus {
+	outline:none;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+	border-color: #ccc;
+}
+.btn-login {
+	background-color: #59B2E0;
+	outline: none;
+	color: #fff;
+	font-size: 14px;
+	height: auto;
+	font-weight: normal;
+	padding: 14px 0;
+	text-transform: uppercase;
+	border-color: #59B2E6;
+}
+.btn-login:hover,
+.btn-login:focus {
+	color: #fff;
+	background-color: #53A3CD;
+	border-color: #53A3CD;
+}
+.forgot-password {
+	text-decoration: underline;
+	color: #888;
+}
+.forgot-password:hover,
+.forgot-password:focus {
+	text-decoration: underline;
+	color: #666;
+}
+
+.btn-register {
+	background-color: #1CB94E;
+	outline: none;
+	color: #fff;
+	font-size: 14px;
+	height: auto;
+	font-weight: normal;
+	padding: 14px 0;
+	text-transform: uppercase;
+	border-color: #1CB94A;
+}
+.btn-register:hover,
+.btn-register:focus {
+	color: #fff;
+	background-color: #1CA347;
+	border-color: #1CA347;
+}

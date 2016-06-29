@@ -6,11 +6,11 @@ imports:
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    locale: en
+    locale: es
 
 framework:
     #esi:             ~
-    #translator:      { fallbacks: ["%locale%"] }
+    translator:      { fallbacks: ["%locale%"] }
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -34,6 +34,7 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    cache: false
 
 # Doctrine Configuration
 doctrine:
@@ -64,3 +65,38 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+
+sonata_seo:
+    encoding:         UTF-8
+    page:
+        default: sonata.seo.page.default
+        title:            Gestion de actividades
+        default:          sonata.seo.page.default
+        metas:
+            name:
+                keywords:             Gestion de actividades
+                description:          Web para gestion de actividades
+                robots:               index, follow
+
+            property:
+                # Facebook application settings
+                #'fb:app_id':          XXXXXX
+                #'fb:admins':          admin1, admin2
+
+                # Open Graph information
+                # see http://developers.facebook.com/docs/opengraphprotocol/#types or http://ogp.me/
+                'og:site_name':       Gestion de actividades
+                'og:description':     Tienda de comercio electronico conectada con gsBase
+
+            http-equiv:
+                'Content-Type':         text/html; charset=utf-8
+                #'X-Ua-Compatible':      IE=EmulateIE7
+
+            charset:
+                UTF-8:    ''
+
+        head:
+            'xmlns':              http://www.w3.org/1999/xhtml
+            'xmlns:og':           http://opengraphprotocol.org/schema/
+            #'xmlns:fb':           "http://www.facebook.com/2008/fbml"

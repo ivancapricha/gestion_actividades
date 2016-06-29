@@ -1,0 +1,47 @@
+<div class="footer-widget">
+  <div class="container">
+	<div class="row">
+	
+		<div class="col-sm-2">
+			<div class="single-widget">
+				<h2>Mi cuenta</h2>
+				<ul class="nav nav-pills nav-stacked">
+					<li><a href="{{ asset('usuario') }}" rel="nofollow,noindex" >Mis Datos</a></li>
+					<li><a href="{{ asset('pedidos') }}" rel="nofollow,noindex">Mis Pedidos</a></li>
+					<li><a href="{{ asset('direcciones') }}" rel="nofollow,noindex">Mis Direcciones</a></li>
+				</ul>
+			</div>
+		</div>	
+	
+		{% if pie is defined %}		
+			{% for col in pie %}
+				<div class="col-sm-2">
+					<div class="single-widget">
+						<h2>{{ col.getTitulo() }}</h2>
+						<ul class="nav nav-pills nav-stacked">
+							{% for elem in col.getContenido() %}
+								{% if elem.getId != "" %}
+									<li><a href="{{ url('contenido', {'id':elem.getId()} ) }}" rel="nofollow">{{ elem.getTitulo() }}</a></li>
+								{% else %}
+									<li><a href="{{ elem.getLink() }}"><span class="fa fa-{{ elem.getIcon() }}"></span> {{ elem.getTitulo() }}</a></li>
+								{% endif %}
+							{% endfor %}
+						</ul>
+					</div>      
+				</div>
+			{% endfor %}
+			
+		{% endif %}
+		
+	</div>
+  </div>
+</div>
+
+<div class="footer-bottom">
+	<div class="container">
+		<div class="row">
+			<p class="pull-left"> gsWeb. Copyright &copy; 2016. All rights reserved. Versión {{ config.get_web_version() }}</p> 
+			<p class="pull-right">Developed by <span><a href="http://www.galdon.com" target="_blank">Gald&oacute;n Software S.A.</a></span></p>			
+		</div>
+	</div>
+</div>

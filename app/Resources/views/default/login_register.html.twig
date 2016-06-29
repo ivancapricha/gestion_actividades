@@ -1,0 +1,149 @@
+{% set theme = app.session.get('theme') %}
+
+{% extends theme~'/base.html.twig' %} 
+
+{% block content %} 
+	
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+				{% if error %}
+					<div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+				{% endif %}
+
+				
+				{% set tx_class_login = '' %}
+				{% set tx_class_register = '' %}
+				{% if form_active == 'register'%}
+					{% set tx_class_register = 'active'%}
+				{% else %}	
+					{% set tx_class_login = 'active'%}
+				{% endif %}				
+				<div class="panel panel-login">
+					<div class="panel-heading">
+						<div class="row">
+							<div class="col-xs-6">
+								<a href="#" class="{{ tx_class_login }}" id="login-form-link">Login</a>
+							</div>
+							<div class="col-xs-6">
+								<a href="#" class="{{ tx_class_register }}" id="register-form-link">Registrar</a>
+							</div>
+						</div>
+						<hr>
+					</div>
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-lg-12">
+							
+								
+								{% set tx_display = 'none' %}
+								{% if form_active == 'login'%}
+									{% set tx_display = 'block'%}
+								{% endif %}
+
+								<form id="login-form" action="{{path('login')}}" method="post" role="form" style="display: {{tx_display}};">
+									<div class="form-group">
+										<input type="text" name="_username" id="username" tabindex="1" class="form-control" placeholder="Usuario" value="">
+									</div>
+									<div class="form-group">
+										<input type="password" name="_password" id="password" tabindex="2" class="form-control" placeholder="Password">
+									</div>
+									<div class="form-group">
+										<div class="row">
+											<div class="col-sm-6 col-sm-offset-3">
+												<input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Login">
+											</div>
+										</div>
+									</div>
+								</form>
+								
+								{% set tx_display = 'none' %}
+								{% if form_active == 'register'%}
+									{% set tx_display = 'block'%}
+								{% endif %}
+								
+								
+								<div id="register-form" style="display: {{tx_display}};">
+									{{ form_start(form) }}		
+										<div class="form-group">
+											{{ form_row(form.username, { 'attr': {'class': "form-control",'placeholder': 'Usuario'} }) }}
+										</div>
+										<div class="form-group">
+											{{ form_row(form.email, { 'attr': {'class': "form-control",'placeholder': 'Email'} }) }}
+										</div>	
+										<div class="form-group">	
+											{{ form_row(form.plainPassword.first, { 'attr': {'class': "form-control",'placeholder': 'Password'} }) }}
+										</div>	
+										<div class="form-group">	
+											{{ form_row(form.plainPassword.second, { 'attr': {'class': "form-control",'placeholder': 'Confirme Password'} }) }}
+										</div>
+										<div class="form-group">
+											<div class="row">
+												<div class="col-sm-6 col-sm-offset-3">
+													<input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-register" value="Registrar">
+												</div>
+											</div>
+										</div>										
+										
+									{{ form_end(form) }}								
+								</div>
+								
+								<!--
+								<form id="register-form" action="{{path('register')}}" method="post" role="form" style="display: {{tx_display}};" name="user">
+									<div class="form-group">
+										<input type="text" name="user[username]" id="user_username" tabindex="1" class="form-control" placeholder="Usuario" value="">
+									</div>
+									<div class="form-group">
+										<input type="email" name="user[email]" id="user_email" tabindex="1" class="form-control" placeholder="Email" value="">
+									</div>
+									<div class="form-group">
+										<input type="password" name="user[plainPassword][first]" id="user_plainPassword_first" tabindex="2" class="form-control" placeholder="Password">
+									</div>
+									<div class="form-group">
+										<input type="password" name="user[plainPassword][second]" id="user_plainPassword_second" tabindex="2" class="form-control" placeholder="Confirme Password">
+									</div>
+									<div class="form-group">
+										<div class="row">
+											<div class="col-sm-6 col-sm-offset-3">
+												<input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-register" value="Registrar">
+											</div>
+										</div>
+									</div>
+									<input id="user__token" type="hidden" value="Kg7q91YxJljb_-zYQD2n7atX7DBHTauC4sCT3LS2ijM" name="user[_token]">
+								</form>
+								-->
+							</div>
+						</div>
+					</div>
+				</div>	
+			</div>	
+		</div>		
+	</div>			
+	
+	<script>
+		$(function() {
+
+			$('#login-form-link').click(function(e) {
+				$("#login-form").delay(100).fadeIn(100);
+				$("#register-form").fadeOut(100);
+				$('#register-form-link').removeClass('active');
+				$(this).addClass('active');
+				e.preventDefault();
+				e.stopPropagation();
+				
+			});
+			$('#register-form-link').click(function(e) {
+				$("#register-form").delay(100).fadeIn(100);
+				$("#login-form").fadeOut(100);
+				$('#login-form-link').removeClass('active');
+				$(this).addClass('active');
+				e.preventDefault();
+				e.stopPropagation();
+				
+			});
+
+		});
+	</script>
+	
+{% endblock %} 	
+

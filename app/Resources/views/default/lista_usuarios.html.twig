@@ -1,0 +1,46 @@
+{% set theme = app.session.get('theme') %}
+
+{% extends theme~'/base.html.twig' %} 
+
+{% block content %} 
+
+	<div class="container">
+		<div class="row">
+			<h1>Panel de Administración </h1>
+			
+			<hr> 
+			
+			<h3>Lista de Usuarios</h3>
+			
+            <div class="table-responsive">
+                <table class="table table-bordered tbl-cart">
+                    <thead>
+                        <tr>
+							<td>Nombre</td>
+							<td>Email</td>
+							<td>Tipo</td>
+							<td class="text-center">Eliminar</td>
+							<td class="text-center">Editar</td>
+                            </tr>
+                        </thead>
+                    </thead>
+                    <tbody>
+						{% for ln in list %}
+							<tr>
+								<td>{{ ln.username }}</td>
+								<td>{{ ln.email }}</td>
+								<td>{{ ln.role }}
+								</td>
+								<td class="text-center"> <a rel="2" class="remove_cart" href="{{ url('eliminar_usuario',{'id': ln.id()}) }}"> <i class="fa fa-trash-o"></i> </a></td>
+								<td class="text-center"> <a rel="2" class="remove_cart" href="{{ url('editar_usuario',{'id': ln.getUrlAmigable()}) }}"> <i class="glyphicon glyphicon-pencil"></i> </a></td>
+							</tr>
+						{% endfor %}					   
+                    </tbody>    
+                </table>    
+            </div>					
+		</div>	
+	</div>
+
+	
+{% endblock %} 
+

@@ -1,0 +1,43 @@
+{% set config = app.session.get('config') %}
+
+<tr>
+	{% for ln_col in config.get_cols_list_reducida() %}                
+		{% set deno = ln_col[0] %}
+		{% set tipo = ln_col[1] %}
+		{% if tipo=='IMG' %}
+			<td class="hidden-xs">
+				<a href="{{ asset(url('articulo',{'id': articulo.getUrlAmigable()})) }}">
+					<img width="47" height="47" title="" alt="{{ articulo.getNombre() }}" src="{{ asset(articulo.getImagenPpal()) }}">
+				</a>
+			</td>
+		{% elseif tipo=='REF' %}	
+			<td>{{ articulo.getRef() }}</td>			
+		{% elseif tipo=='COD' %}	
+			<td>{{ articulo.getId() }}</td>			
+		{% elseif tipo=='DENO' %}	
+			<td><a href="{{ url('articulo',{'id': articulo.getUrlAmigable()}) }}">{{ articulo.getNombre() }}</a></td>
+		{% elseif tipo=='DESC' %}	
+			<td>{{ articulo.getDescripcion() }}</td>						
+		{% elseif tipo=='MARCA' %}	
+			<td>{{ articulo.getMarca_Deno() }}</td>												
+		{% elseif tipo=='STOCK' %}	
+			<td>{{ articulo.getStock()|number_format(0) }}</td>						
+		{% elseif tipo=='PVP' %}		
+			<td class="price">{{ articulo.getBruto()|number_format(config.get_decimales()) }} &euro;</td>	
+		{% elseif tipo=='PDTO' %}		
+			<td class="price">{{ articulo.getDTO()|number_format(config.get_decimales()) }}</td>				
+		{% elseif tipo=='PVPF' %}		
+			<td class="price">{{ articulo.getPrecio()|number_format(config.get_decimales()) }} &euro;</td>				
+		{% elseif tipo=='PVPR' %}		
+			<td class="price">{{ articulo.getPvp_Recomendado()|number_format(config.get_decimales()) }} &euro;</td>				
+		{% elseif tipo=='ICO' %}	
+		    <td class="text-center">
+				<a rel="2" href="#"> <i class="glyphicon glyphicon-shopping-cart"></i> </a>
+			</td>
+		{% else %}		
+			<td></td>
+		{% endif %}	
+	{% endfor %}		
+
+
+</tr>

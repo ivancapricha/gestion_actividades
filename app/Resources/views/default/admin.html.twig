@@ -1,0 +1,31 @@
+{% set theme = app.session.get('theme') %}
+
+{% extends theme~'/base.html.twig' %} 
+
+
+{% block content %} 
+
+	<div class="container">
+		<div class="row">
+			<h1>Panel de Administración </h1>
+			
+			<hr> 
+			
+			<h4>Edicción de archivos generales </h4>
+			<div class="div-group">
+                <div><a href="{{ url('curso') }}">Cursos</a></div>                      
+                <div><a href="{{ url('colegio') }}">Colegios</a></div> 				
+                <div><a href="{{ url('monitor') }}">Monitores</a></div> 				
+                <div><a href="{{ url('nivel') }}">Niveles</a></div>										
+				<div><a href="{{ url('actividad') }}">Actividades</a></div>												
+				<div><a href="{{ url('lista_usuarios') }}">Usuarios</a></div>												
+			</div>			
+			
+			<hr>
+			
+		</div>	
+	</div>
+
+	
+{% endblock %} 
+

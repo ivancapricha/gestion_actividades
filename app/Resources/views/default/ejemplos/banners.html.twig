@@ -1,0 +1,38 @@
+{% set theme = app.session.get('theme') %}
+{% extends theme~'/base_main.html.twig' %}
+
+{% block stylesheets %}
+
+	{{ parent() }}
+	
+	<!-- Custom styles for this template -->
+	<link href="{{ asset('css/'~theme~'/contenido.css') }}" rel="stylesheet">
+	
+{% endblock %}
+
+
+{% block principal %}
+
+      <div class="blog-header">
+        {% if (banner.getImagenId() != '') %}
+            <img class="featurette-image img-responsive center-block" alt="" src="{{ asset(banner.getUrl_Imagen()) }}">
+        {% endif %}
+		<h1 class="blog-title">{{ banner.getTitulo() }}</h1>
+		<p class="lead blog-description">{{ banner.getDescripcion() | raw }}</p>	  
+	  </div>
+
+	  <div class="row">
+
+        <div class="col-sm-8 blog-main">
+
+          <div class="blog-post">
+		  
+		    <p>{{ banner.getContenido()|raw }}</p>
+			
+          </div>
+
+        </div>
+
+      </div>
+
+{% endblock %}

@@ -1,0 +1,102 @@
+{% set theme = app.session.get('theme') %}
+{% extends theme ~ '/indexs.html.twig' %}
+
+{% block principal %}
+
+<div class="section container-fluid ng-scope">
+  <div class="row">     
+
+    <ol class="breadcrumb">
+        <li><a href="{{ url('index_shop') }}">Inicio</a></li>
+        <li class="active">{{ marca.getNombre() }}</li>
+    </ol>
+  
+    <h1 class="text-center">{{ marca.getNombre() }}</h1>
+    {% if (marca.getImagen() != '') %}
+        <div class="col-sm-10 col-sm-offset-1">
+            <img class="featurette-image img-responsive center-block" alt="" src="{{ asset(marca.getImagen()) }}">   
+        </div>
+     {% endif %}
+  </div>  
+  
+  {% if (marca.getDescripcion() != '') %}
+      <div class="row">                
+         <div class="col-sm-10 col-sm-offset-1">
+                {{ marca.getDescripcion()|raw }}  
+         </div>
+      </div>  
+  {% endif %}
+  
+    <hr/>    
+    
+    {% if marca.getArticulos() | length > 0 %}    
+        <div class="row">
+			{#
+			<!-- LISTA REDUCIDA-->
+			#}			
+            {% if config.get_tipo_res_busqueda() == constant('AppBundle\\Entity\\Config::TIPO_LISTA_BUSQ_REDUCIDA') %}                    
+            <div class="table-responsive">
+                <table class="table table-bordered tbl-cart">
+                    <thead>
+                        <tr>
+							{% for ln_col in config.get_cols_list_reducida() %}                
+								{% set deno = ln_col[0] %}
+								{% set tipo = ln_col[1] %}
+								{% if tipo=='IMG' %}
+									<td class="hidden-xs">{{ deno }}</td>
+								{% else %}
+									<td>{{ deno }}</td>
+								{% endif %}	
+							{% endfor %}	
+                            </tr>
+                        </thead>
+                    </thead>
+                    <tbody>
+                        {% for articulo in marca.getArticulos() %}                
+                            {{ include (theme~'/block_articulo_list.html.twig',{'articulo': articulo})}}
+                        {% endfor %}    
+                    </tbody>    
+                </table>    
+            </div>       
+            {% else %}		
+				{% for articulo in marca.getArticulos() %}                
+					<div class="col-lg-4 col-sm-4 hero-feature text-center">
+						{{ include (theme~'/block_articulo.thumb.html.twig',{'articulo': articulo})}}
+					</div>
+				{% endfor %}
+			{% endif %}	
+        </div>
+        {% if marca.getPages() > 0 %}  
+            <nav>
+                <ul class="pagination">
+
+                    {% if current_page==1 %}
+                        <li class="disabled"><a href="#" cal aria-label="Anterior"> <span aria-hidden="true">&laquo;</span> </a></li>
+                    {% else %}
+                        <li><a href="{{ url('marca',{'id': marca.GetId(), 'nombre': marca.getNombreSEO()}) }}?page={{ current_page - 1 }}" aria-label="Anterior"> <span aria-hidden="true">&laquo;</span> </a></li>
+                    {% endif %}
+
+                    {% for i in range(1,marca.getPages()) %}
+                        <li 
+                        {% if current_page==i %}
+                            class="active" 
+                        {% endif %}                        
+                        ><a href="{{ url('marca',{'id': marca.GetId(), 'nombre': marca.getNombreSEO()}) }}?page={{ i }}">{{ i }}</a></li>
+                    {% endfor %}
+					
+					{% if current_page < marca.getPages() %}	
+						<li><a href="{{ url('marca',{'id': marca.GetId(), 'nombre': marca.getNombreSEO()}) }}?page={{ current_page + 1 }}" aria-label="Next"> <span aria-hidden="true">&raquo;</span> </a></li>
+					{% else %}	
+						<li class="disabled"><a href="#" aria-label="Next"> <span aria-hidden="true">&raquo;</span> </a></li>
+					{% endif %}						
+                </ul>
+            </nav>
+        {% endif %}
+        
+        
+    {% endif %}
+    
+</div>
+
+
+{% endblock %}

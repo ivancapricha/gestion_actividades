@@ -1,0 +1,39 @@
+
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">{{ titulo }}</h3>
+  </div>
+  <div class="panel-body">
+
+    {% if prioritarias|length > 0 %}
+        <div class="div-group">
+        {% for marca in prioritarias %}
+            {% if marca.getId() != '' %}
+            <div>
+                <a href="{{ url('marca', {'id': marca.getId(), 'nombre': marca.getNombreSEO() } ) }}">{{ marca.getNombre() }}</a>
+            </div>
+            {% endif %}
+        {% endfor %}  
+        </div>
+        <hr/>
+    {% endif %}
+  
+    <div class="dropdown">
+      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        Seleccione ...
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        {% for marca in todas %}
+            {% if marca.getId() != '' %}
+            <li><a href="{{ url('marca', {'id': marca.getId(), 'nombre': marca.getNombreSEO() } ) }}">{{ marca.getNombre() }}</a></li>
+            {% endif %}
+        {% endfor %}
+        {# <li role="separator" class="divider"></li> #}
+      </ul>
+    </div>  
+  
+  </div>
+</div>
+

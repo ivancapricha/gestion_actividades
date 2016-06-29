@@ -1,0 +1,26 @@
+<div class="thumbnail">
+    <img src="http://placehold.it/320x150" alt="">
+    <div class="caption">
+    	<h4 class="pull-right">{{ articulo.getPrecio()|number_format(2, '.', ',') }} &euro;</h4>
+        <h3>{{ articulo.getNombre() }}</h3>
+        <p>{{ articulo.getDescripcion()|raw }}</p>
+        <p>
+        	{% if articulo.getPrecio() > 0 %}
+            	<a href="#" class="btn btn-primary">Comprar</a> 
+            {% else %}
+            	<button type="button" class="btn btn-primary" disabled>Comprar</button> 
+        	{% endif %}
+            <a href="{{ url('articulo',{'id': articulo.getUrlAmigable()}) }}" class="btn btn-default">M&aacute;s Info</a>
+        </p>
+    </div>
+	<div class="ratings">
+	    <p class="pull-right">15 reviews</p>
+	    <p>
+	        <span class="glyphicon glyphicon-star"></span>  
+	        <span class="glyphicon glyphicon-star"></span>  
+	        <span class="glyphicon glyphicon-star"></span>  
+	        <span class="glyphicon glyphicon-star"></span>  
+	        <span class="glyphicon glyphicon-star"></span>  
+	    </p>
+	</div>
+</div>
