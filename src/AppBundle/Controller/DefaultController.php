@@ -15,7 +15,7 @@ use AppBundle\Entity\Colegio;
 use AppBundle\Entity\Monitor;
 use AppBundle\Entity\User;
 use AppBundle\Form\UserType;
-
+ 
 class DefaultController extends Controller
 {
 	private $DEFAULT_THEME = "default";

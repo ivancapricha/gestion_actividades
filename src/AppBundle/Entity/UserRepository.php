@@ -1,5 +1,5 @@
 <?php
-
+ 
 namespace AppBundle\Entity;
 
 use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
