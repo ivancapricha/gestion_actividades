@@ -5,7 +5,7 @@ function AjaxForm()
         e.preventDefault();
 		
 		/*
-		* Recuperamos los campos del formulario
+		* Recuperamos los campos del formulario 
 		*/
 		
 		id_form = $(this).attr('id');
